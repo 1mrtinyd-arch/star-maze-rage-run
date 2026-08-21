@@ -1,0 +1,519 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #060812;
+  --panel: #10162b;
+  --line: #354575;
+  --text: #f6f8ff;
+  --muted: #8f9bc0;
+  --cyan: #37e8ff;
+  --pink: #ff4fa3;
+  --yellow: #ffe55b;
+  --danger: #ff526e;
+  --green: #48f2b0;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: radial-gradient(
+    circle at 50% -15%,
+    #26376d 0,
+    #0b1022 45%,
+    #04050b 100%
+  );
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  font: inherit;
+  border: 0;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.app {
+  width: min(1060px, 100%);
+  padding: 14px 12px 28px;
+}
+
+/* ============================================================
+   MAIN MENU
+   ============================================================ */
+
+.menu-screen {
+  min-height: calc(100vh - 42px);
+  display: grid;
+  place-items: center;
+}
+
+.menu-card {
+  width: min(720px, 96%);
+  padding: 30px;
+  text-align: center;
+  background: #0d1429ee;
+  border: 1px solid #415487;
+  border-radius: 24px;
+  box-shadow: 0 25px 90px #000b;
+}
+
+.logo {
+  font-size: clamp(31px, 7vw, 60px);
+  font-weight: 1000;
+  letter-spacing: -2px;
+  line-height: 0.88;
+  text-shadow: 0 0 20px #526bff99;
+}
+
+.subtitle {
+  color: var(--pink);
+  font-weight: 1000;
+  letter-spacing: 5px;
+  margin-top: 7px;
+}
+
+.tag {
+  font-size: 9px;
+  color: #8796bf;
+  font-weight: 900;
+  letter-spacing: 1px;
+  margin-top: 6px;
+}
+
+.menu-title {
+  margin: 30px 0 12px;
+  font-size: 13px;
+  font-weight: 1000;
+  color: var(--cyan);
+  letter-spacing: 2px;
+}
+
+.mode-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 9px;
+}
+
+.mode-grid button,
+.menu-tools button,
+.skin-grid button,
+.modal-card > button {
+  padding: 12px 10px;
+  border-radius: 11px;
+  color: white;
+  background: #17244a;
+  border: 1px solid #43598e;
+  font-weight: 1000;
+}
+
+.mode-grid button:hover,
+.menu-tools button:hover,
+.skin-grid button:hover,
+.modal-card > button:hover {
+  background: #213361;
+}
+
+.menu-tools {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.menu-note {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.5;
+  margin: 18px auto 0;
+  max-width: 560px;
+}
+
+/* ============================================================
+   GAME HEADER
+   ============================================================ */
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 9px;
+}
+
+.stats {
+  display: flex;
+  gap: 6px;
+}
+
+.stats div {
+  min-width: 61px;
+  text-align: center;
+  background: #111a35e8;
+  border: 1px solid #354476;
+  border-radius: 11px;
+  padding: 6px 7px;
+  box-shadow: 0 8px 25px #0006;
+}
+
+.stats small {
+  display: block;
+  color: var(--muted);
+  font-size: 8px;
+  font-weight: 900;
+}
+
+.stats b {
+  font-size: 18px;
+}
+
+/* ============================================================
+   HUD
+   ============================================================ */
+
+.hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  background: #0d1429ee;
+  border: 1px solid #34426d;
+  border-radius: 12px;
+  padding: 8px 10px;
+  margin-bottom: 9px;
+}
+
+.hud #message {
+  font-weight: 900;
+  font-size: 13px;
+  min-height: 18px;
+}
+
+.mode-label {
+  color: #7f8db5;
+  font-size: 9px;
+  font-weight: 900;
+  margin-top: 3px;
+}
+
+.mode-label b {
+  color: var(--cyan);
+}
+
+.hud-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+#soundBtn,
+#menuButton,
+#menuSoundButton {
+  background: #1a274b;
+  color: #fff;
+  border: 1px solid #455a91;
+  border-radius: 9px;
+  padding: 8px 10px;
+  font-size: 10px;
+  font-weight: 1000;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   GAME AREA
+   ============================================================ */
+
+.game-wrap {
+  position: relative;
+  width: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid #3d4f87;
+  background: #050813;
+  box-shadow: 0 20px 70px #000b, 0 0 35px #455cff25;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  background: #070b17;
+  touch-action: none;
+}
+
+.danger-meter {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  width: min(220px, 43%);
+  z-index: 3;
+  font-size: 9px;
+  font-weight: 1000;
+  letter-spacing: 1px;
+  text-shadow: 0 1px 2px #000;
+}
+
+.danger-meter div {
+  height: 7px;
+  margin-top: 4px;
+  background: #12182a;
+  border: 1px solid #3a4568;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.danger-meter i {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: var(--danger);
+  box-shadow: 0 0 12px #ff526e;
+  transition: width 0.12s;
+}
+
+#flash {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: #ff315060;
+  opacity: 0;
+  z-index: 4;
+}
+
+/* ============================================================
+   GAME OVERLAYS
+   ============================================================ */
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: #050815c2;
+  backdrop-filter: blur(4px);
+  z-index: 5;
+}
+
+.card {
+  width: min(500px, 88%);
+  text-align: center;
+  background: #111a35;
+  border: 1px solid #536aa8;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 25px 80px #000c;
+}
+
+.big {
+  font-size: clamp(25px, 6vw, 42px);
+  font-weight: 1000;
+}
+
+.card p {
+  color: #bdc7e4;
+}
+
+.rage {
+  font-weight: 1000;
+  margin: 13px 0;
+  color: var(--yellow);
+}
+
+.tiny-d {
+  margin: 15px 0;
+  padding: 12px;
+  border-radius: 12px;
+  background: #16244a;
+  border: 1px solid #435b94;
+  color: #f5f7ff;
+  font-weight: 900;
+  line-height: 1.4;
+}
+
+.card button {
+  background: linear-gradient(135deg, #ff4fa3, #745cff);
+  color: white;
+  font-weight: 1000;
+  padding: 13px 18px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px #ff4fa344;
+}
+
+/* ============================================================
+   LEGEND / CONTROLS
+   ============================================================ */
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  color: #c8d0eb;
+  font-size: 10px;
+  font-weight: 900;
+  padding: 9px;
+}
+
+.legend span {
+  background: #0c1226cc;
+  border: 1px solid #273557;
+  border-radius: 8px;
+  padding: 4px 7px;
+}
+
+.controls {
+  text-align: center;
+  margin-top: 4px;
+}
+
+.controls button {
+  width: 62px;
+  height: 52px;
+  margin: 3px;
+  background: #152042;
+  border: 1px solid #415487;
+  color: #fff;
+  border-radius: 13px;
+  font-size: 23px;
+  box-shadow: 0 7px 0 #0a1024;
+  touch-action: none;
+}
+
+.controls button:active {
+  transform: translateY(4px);
+  box-shadow: 0 3px 0 #0a1024;
+}
+
+.tip {
+  font-size: 9px;
+  color: #7885ad;
+  margin-top: 9px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+/* ============================================================
+   MENU MODALS
+   ============================================================ */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: #050815d9;
+  backdrop-filter: blur(5px);
+}
+
+.modal-card {
+  width: min(520px, 96%);
+  max-height: 90vh;
+  overflow: auto;
+  background: #111a35;
+  border: 1px solid #536aa8;
+  border-radius: 20px;
+  padding: 24px;
+  text-align: center;
+  box-shadow: 0 25px 80px #000c;
+}
+
+.modal-card h2 {
+  margin-top: 0;
+}
+
+.modal-card p {
+  color: #bdc7e4;
+  line-height: 1.5;
+}
+
+.modal-card > button {
+  margin-top: 12px;
+  width: 100%;
+}
+
+.skin-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+#scoreList {
+  display: grid;
+  gap: 7px;
+  text-align: left;
+}
+
+.score-row,
+.empty {
+  padding: 10px;
+  border-radius: 10px;
+  background: #0d1730;
+  border: 1px solid #2d416e;
+  color: #dce3fa;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+@media (max-width: 560px) {
+
+  .app {
+    padding: 9px;
+  }
+
+  .menu-card {
+    padding: 22px 14px;
+  }
+
+  .mode-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-tools {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stats div {
+    min-width: 49px;
+    padding: 5px 4px;
+  }
+
+  .stats small {
+    font-size: 7px;
+  }
+
+  .stats b {
+    font-size: 15px;
+  }
+
+  .hud {
+    align-items: flex-start;
+  }
+
+  .hud-buttons {
+    flex-direction: column;
+  }
+
+  .controls button {
+    width: 58px;
+    height: 50px;
+  }
+
+  .tag {
+    font-size: 8px;
+  }
+}

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>STAR MAZE — RAGE RUN</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ========================================================
+       MAIN MENU
+       ======================================================== -->
+  <section id="menu" class="menu-screen">
+
+    <div class="menu-card">
+      <div class="logo">STAR MAZE</div>
+      <div class="subtitle">RAGE RUN</div>
+      <div class="tag">GIANT MAZE • MOVING TRAPS • INFINITE LEVELS</div>
+
+      <div class="menu-title">CHOOSE YOUR RUN</div>
+
+      <div class="mode-grid">
+        <button data-mode="classic">⭐ CLASSIC</button>
+        <button data-mode="challenge">🔥 CHALLENGE</button>
+        <button data-mode="endless">♾️ ENDLESS</button>
+        <button data-mode="timeattack">⏱️ TIME ATTACK</button>
+        <button data-mode="practice">🎯 PRACTICE</button>
+        <button data-mode="legacy">🕹️ LEGACY</button>
+      </div>
+
+      <div class="menu-tools">
+        <button data-panel="settingsPanel">⚙️ SETTINGS</button>
+        <button data-panel="shopPanel">✨ SKINS</button>
+        <button data-panel="scoresPanel">🏆 HIGH SCORES</button>
+        <button data-panel="aboutPanel">ℹ️ ABOUT</button>
+        <button data-panel="exitPanel">🚪 EXIT</button>
+      </div>
+
+      <p class="menu-note">
+        Every mode can continue forever. The maze gets harder as the levels rise.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ========================================================
+       GAME SCREEN
+       ======================================================== -->
+  <section id="gameScreen" class="hidden">
+
+    <header>
+      <div>
+        <div class="logo">STAR MAZE</div>
+        <div class="subtitle">RAGE RUN</div>
+        <div class="tag">GIANT MAZE • MOVING TRAPS • UNLIMITED ATTEMPTS</div>
+      </div>
+
+      <div class="stats">
+        <div>
+          <small>LEVEL</small>
+          <b id="level">1</b>
+        </div>
+        <div>
+          <small>STARS</small>
+          <b id="stars">0</b>
+        </div>
+        <div>
+          <small>BEST</small>
+          <b id="best">1</b>
+        </div>
+      </div>
+    </header>
+
+    <section class="hud">
+      <div>
+        <div id="message">Find ⭐. The maze is not your friend.</div>
+        <div class="mode-label">MODE: <b id="modeLabel">CLASSIC</b></div>
+      </div>
+      <div class="hud-buttons">
+        <button id="soundBtn">🔊 SOUND ON</button>
+        <button id="menuButton">☰ MENU</button>
+      </div>
+    </section>
+
+    <main class="game-wrap">
+      <canvas id="game" aria-label="Star Maze Rage Run"></canvas>
+
+      <div class="danger-meter">
+        <span>☠ DANGER</span>
+        <div><i id="dangerFill"></i></div>
+      </div>
+
+      <div id="flash"></div>
+
+      <!-- LEVEL COMPLETE -->
+      <div id="complete" class="overlay hidden">
+        <div class="card">
+          <div class="big">⭐ LEVEL CLEAR!</div>
+          <p id="clearText">You escaped.</p>
+          <div class="tiny-d" id="tinyDText">
+            TinyD congratulates you!
+          </div>
+          <div class="rage">🎉 YOU SURVIVED THE GIANT MAZE.</div>
+          <button id="nextBtn">NEXT LEVEL →</button>
+        </div>
+      </div>
+
+      <!-- TRAP SCREEN -->
+      <div id="dead" class="overlay hidden">
+        <div class="card">
+          <div class="big">💀 TRAPPED!</div>
+          <p id="deadText">The maze got you.</p>
+          <div class="rage" id="rageText">BRO YOU ACTUALLY FELL FOR THAT 💀</div>
+          <button id="respawnBtn">RESPAWN</button>
+        </div>
+      </div>
+    </main>
+
+    <div class="legend">
+      <span>⭐ YOU</span>
+      <span>🏁 EXIT</span>
+      <span>🔺 MOVING TRAP</span>
+      <span>⚡ BOOST</span>
+      <span>🔷 CHECKPOINT</span>
+      <span>🌀 SECRET</span>
+    </div>
+
+    <div class="controls">
+      <button data-key="ArrowUp">▲</button>
+      <div>
+        <button data-key="ArrowLeft">◀</button>
+        <button data-key="ArrowDown">▼</button>
+        <button data-key="ArrowRight">▶</button>
+      </div>
+      <div class="tip">
+        WASD / ARROWS • HOLD TO MOVE • TIME THE MOVING TRAPS
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ========================================================
+       SETTINGS
+       ======================================================== -->
+  <section id="settingsPanel" class="modal hidden">
+    <div class="modal-card">
+      <h2>⚙️ SETTINGS</h2>
+      <button id="menuSoundButton">🔊 SOUND ON</button>
+      <p>Sound is unlocked after your first click or key press.</p>
+      <button data-close-panel>BACK</button>
+    </div>
+  </section>
+
+
+  <!-- ========================================================
+       SKINS
+       ======================================================== -->
+  <section id="shopPanel" class="modal hidden">
+    <div class="modal-card">
+      <h2>✨ PLAYER SKINS</h2>
+      <p>Cosmetic only. They do not change gameplay.</p>
+
+      <div class="skin-grid">
+        <button data-skin="white">⭐ WHITE</button>
+        <button data-skin="cyan">💎 CYAN</button>
+        <button data-skin="yellow">🌟 GOLD</button>
+        <button data-skin="pink">💗 PINK</button>
+      </div>
+
+      <button data-close-panel>BACK</button>
+    </div>
+  </section>
+
+
+  <!-- ========================================================
+       HIGH SCORES
+       ======================================================== -->
+  <section id="scoresPanel" class="modal hidden">
+    <div class="modal-card">
+      <h2>🏆 HIGH SCORES</h2>
+      <div id="scoreList"></div>
+      <button data-close-panel>BACK</button>
+    </div>
+  </section>
+
+
+  <!-- ========================================================
+       ABOUT
+       ======================================================== -->
+  <section id="aboutPanel" class="modal hidden">
+    <div class="modal-card">
+      <h2>ℹ️ ABOUT STAR MAZE</h2>
+      <p>
+        Star Maze: Rage Run is a giant procedural maze game.
+        Find the exit, avoid moving traps, collect boosts,
+        save checkpoints and keep climbing through infinite levels.
+      </p>
+      <p>
+        TinyD celebrates every successful level.
+      </p>
+      <button data-close-panel>BACK</button>
+    </div>
+  </section>
+
+
+  <!-- ========================================================
+       EXIT MESSAGE
+       ======================================================== -->
+  <section id="exitPanel" class="modal hidden">
+    <div class="modal-card">
+      <h2>🚪 EXIT</h2>
+      <p>
+        The browser cannot safely close itself. You can simply close
+        this tab/window when you are finished playing.
+      </p>
+      <button data-close-panel>BACK TO MENU</button>
+    </div>
+  </section>
+
+</div>
+
+<script src="game.js"></script>
+</body>
+</html>
